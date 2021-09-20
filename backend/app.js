@@ -1,20 +1,20 @@
 const express = require("express");
 const app = express();
 const { Sequelize } = require("sequelize");
+const sequelize = require("./config/database");
 
-// database connection
-const sequelize = new Sequelize(
-  process.env.MYSQL_DB_NAME,
-  process.env.MYSQL_USER,
-  process.env.MYSQL_PWD,
-  {
-    dialect: "mysql",
-  }
-);
-sequelize
-  .authenticate()
-  .then(() => console.log("[MYSQL] connection success !"))
-  .catch((err) => console.log("[MYSQL] connection failed :", err));
+// set database tables
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+db.user = require("./models/users")(sequelize, Sequelize);
+db.roles = require("./models/roles")(sequelize, Sequelize);
+db.posts = require("./models/posts")(sequelize, Sequelize);
+db.comments = require("./models/comments")(sequelize, Sequelize);
+
+/* remove force true for production */
+db.sequelize.sync({ force: true });
 
 // allow Cross Origin
 app.use((req, res, next) => {
@@ -30,8 +30,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.json());
+
 app.get("/", (req, res, next) => {
-  res.send("Hello World !");
+  res.json({ message: "Hello World !" });
 });
 
 module.exports = app;
