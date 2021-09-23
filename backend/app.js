@@ -1,36 +1,26 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+// Sync Database
 const { Sequelize } = require("sequelize");
-const sequelize = require("./config/database");
+const sequelize = require("./config/database/connect")(Sequelize);
+require("./config/database/build")(sequelize, Sequelize);
 
-// set database tables
-const db = {};
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+// Routes
+const usersRoutes = require("./routes/users");
+const postsRoutes = require("./routes/posts");
+const commentsRoutes = require("./routes/comments");
 
-db.user = require("./models/users")(sequelize, Sequelize);
-db.roles = require("./models/roles")(sequelize, Sequelize);
-db.posts = require("./models/posts")(sequelize, Sequelize);
-db.comments = require("./models/comments")(sequelize, Sequelize);
-
-/* remove force true for production */
-db.sequelize.sync({ force: true });
-
-// allow Cross Origin
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
+// Allow Cross Origin
+app.use(cors());
 
 app.use(express.json());
+
+// Routing
+app.use("/api/auth", usersRoutes);
+app.use("/api/posts", postsRoutes);
+app.use("/api/comments", commentsRoutes);
 
 app.get("/", (req, res, next) => {
   res.json({ message: "Hello World !" });
