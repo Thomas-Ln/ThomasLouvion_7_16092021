@@ -23,5 +23,6 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
     },
   });
+
   return Posts;
 };
