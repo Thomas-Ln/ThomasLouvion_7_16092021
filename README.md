@@ -6,15 +6,14 @@ cd backend
 
 # Set Database
 # create a mysql database & grant all access(1)
-# import tables in database
-mysql -u [your_username] -p [your_database_name] < database.sql
 
 # Set Environment
 touch .env
 # in this file add :
-MYSQL_DB_NAME="[your_database]"
-MYSQL_USER="[your_username]"
-MYSQL_PWD="[your_user_password]"
+MYSQL_DB_NAME="[your_mysql_database_name]"
+MYSQL_USER="[your_mysql_username]"
+MYSQL_PWD="[your_mysql_user_password]"
+JWT_KEY="[with_the_value_you_want]"
 
 # Install dependencies
 npm install

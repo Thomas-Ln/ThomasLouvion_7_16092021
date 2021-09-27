@@ -22,8 +22,4 @@ app.use("/api/auth", usersRoutes);
 app.use("/api/posts", postsRoutes);
 app.use("/api/comments", commentsRoutes);
 
-app.get("/", (req, res, next) => {
-  res.json({ message: "Hello World !" });
-});
-
 module.exports = app;

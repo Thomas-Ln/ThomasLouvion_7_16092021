@@ -9,10 +9,7 @@ module.exports = (Sequelize) => {
     }
   );
 
-  sequelize
-    .authenticate()
-    .then(() => console.log("[MYSQL] connection success !"))
-    .catch((err) => console.log("[MYSQL] connection failed :", err));
+  sequelize.authenticate();
 
   return sequelize;
 };
