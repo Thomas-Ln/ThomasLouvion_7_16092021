@@ -1,0 +1,21 @@
+<form
+  [formGroup]="signupForm"
+  (ngSubmit)="onSubmit()"
+  [ngClass]="signupForm.get('name')?.valid ? 'ng-valid' : 'ng-invalid'"
+>
+  <label for="name">Name</label><br />
+  <input type="text" formControlName="name" />
+  <br /><br />
+
+  <label for="email">Email</label><br />
+  <input type="text" formControlName="email" />
+  <br /><br />
+
+  <label for="password">Password</label><br />
+  <input type="password" formControlName="password" />
+  <br /><br />
+
+  <button class="button" type="submit" [disabled]="signupForm.invalid">
+    Signup
+  </button>
+</form>

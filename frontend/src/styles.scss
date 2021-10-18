@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+$success: #00a814;
+$danger: #d40505;
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+input.ng-valid:not(.ng-pristine) {
+  border: 2px solid $success;
+}
+
+input.ng-invalid:not(.ng-pristine) {
+  border: 2px solid $danger;
+}
