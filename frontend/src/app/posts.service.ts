@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError} from 'rxjs/operators';
 import { Post } from './post';
 
 @Injectable({
@@ -15,6 +15,13 @@ export class PostsService {
    getAll(): Observable<Post[]> {
     return this.http.get<Post[]>('/api/posts').pipe(
       catchError(this.handleError<Post[]>('Posts'))
+    );
+  }
+
+   /** GET post by id */
+    getOneById(id: number): Observable<Post> {
+    return this.http.get<Post>(`/api/posts/${id}`).pipe(
+      catchError(this.handleError<Post>(`getPost id=${id}`))
     );
   }
 

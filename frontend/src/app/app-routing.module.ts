@@ -1,3 +1,4 @@
+import { PostComponent } from './post/post.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -9,6 +10,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'posts', component: PostsListComponent },
+  { path: 'posts/:id', component: PostComponent },
 ];
 
 @NgModule({

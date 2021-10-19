@@ -1,0 +1,13 @@
+<main *ngIf="post">
+  <h1 class="text-3xl">{{ post.title }}</h1>
+  <article>
+    <!-- author get by id ? -->
+    <time class="text-gray-400">{{ post.createdAt | date }}</time>
+    <!-- if text else image -->
+    <p class="mt-4">{{ post.text }}</p>
+    <!-- <img src="{{ post.image }}" alt=""> -->
+  </article>
+  <section>
+    <!-- app-comments -->
+  </section>
+</main>
