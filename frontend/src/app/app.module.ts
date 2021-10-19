@@ -8,12 +8,14 @@ import { httpInterceptorProviders } from './interceptors/index';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { PostsListComponent } from './posts-list/posts-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     LoginComponent,
+    PostsListComponent,
   ],
   imports: [
     BrowserModule,

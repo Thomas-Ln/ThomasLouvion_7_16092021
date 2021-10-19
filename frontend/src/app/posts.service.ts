@@ -1,0 +1,33 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Post } from './post';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostsService {
+
+  constructor(private http: HttpClient) { }
+
+  /** GET: all posts */
+   getAll(): Observable<Post[]> {
+    return this.http.get<Post[]>('/api/posts').pipe(
+      catchError(this.handleError<Post[]>('Posts'))
+    );
+  }
+
+  /**
+ * Handle Http operation that failed.
+ * Let the app continue.
+ * @param operation - name of the operation that failed
+ * @param result - optional value to return as the observable result
+ */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  }
+}

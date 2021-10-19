@@ -1,0 +1,24 @@
+<article
+  *ngFor="let post of posts"
+  class="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mb-5"
+>
+  <a routerLink="{{ post.id }}">
+    <!-- <img
+      class="rounded-t-lg"
+      src="https://flowbite.com/docs/images/blog/image-1.jpg"
+      alt=""
+    /> -->
+    <div class="p-4 relative">
+      <h3 class="text-gray-900 font-bold text-lg tracking-tight mb-2">
+        {{ post.title }}
+      </h3>
+      <time class="absolute bottom-6 right-4 text-sm text-gray-400">
+        {{ post.createdAt | date: "d MMMM y - hh'h'mm" }}
+      </time>
+      <p class="font-normal text-sm text-gray-600 mb-3">
+        {{ post.text | slice: 0:150 }}...
+      </p>
+      <button class="btn-info">Read More</button>
+    </div>
+  </a>
+</article>
