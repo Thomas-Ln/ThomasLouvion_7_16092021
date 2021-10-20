@@ -1,21 +1,153 @@
-<form
-  [formGroup]="signupForm"
-  (ngSubmit)="onSubmit()"
-  [ngClass]="signupForm.get('name')?.valid ? 'ng-valid' : 'ng-invalid'"
->
-  <label for="name">Name</label><br />
-  <input type="text" formControlName="name" />
-  <br /><br />
-
-  <label for="email">Email</label><br />
-  <input type="text" formControlName="email" />
-  <br /><br />
-
-  <label for="password">Password</label><br />
-  <input type="password" formControlName="password" />
-  <br /><br />
-
-  <button class="button" type="submit" [disabled]="signupForm.invalid">
-    Signup
-  </button>
-</form>
+<div class="container mx-auto">
+  <div class="flex justify-center px-6">
+    <div class="w-full lg:w-1/3 bg-white p-5 rounded-lg lg:rounded-l-none">
+      <h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
+      <form
+        [formGroup]="signupForm"
+        (ngSubmit)="onSubmit()"
+        [ngClass]="signupForm.get('name')?.valid ? 'ng-valid' : 'ng-invalid'"
+        class="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+      >
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
+            Name
+          </label>
+          <input
+            class="
+              w-full
+              px-3
+              py-2
+              text-sm
+              leading-tight
+              text-gray-700
+              border
+              rounded
+              shadow
+              appearance-none
+            "
+            id="name"
+            type="text"
+            placeholder="Name"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+            Email
+          </label>
+          <input
+            class="
+              w-full
+              px-3
+              py-2
+              mb-3
+              text-sm
+              leading-tight
+              text-gray-700
+              border
+              rounded
+              shadow
+              appearance-none
+            "
+            id="email"
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+        </div>
+        <div class="mb-4 md:flex md:justify-between">
+          <div class="mb-4 md:mr-2 md:mb-0">
+            <label
+              class="block mb-2 text-sm font-bold text-gray-700"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              class="
+                w-full
+                px-3
+                py-2
+                mb-3
+                text-sm
+                leading-tight
+                text-gray-700
+                rounded
+                shadow
+                appearance-none
+              "
+              id="password"
+              type="password"
+              placeholder="******************"
+              formControlName="password"
+            />
+            <!-- Error message -->
+            <!-- <p class="text-xs italic text-red-500">
+                error message
+              </p> -->
+          </div>
+          <div class="md:ml-2">
+            <label
+              class="block mb-2 text-sm font-bold text-gray-700"
+              for="c_password"
+            >
+              Confirm Password
+            </label>
+            <input
+              class="
+                w-full
+                px-3
+                py-2
+                mb-3
+                text-sm
+                leading-tight
+                text-gray-700
+                border
+                rounded
+                shadow
+                appearance-none
+              "
+              id="c_password"
+              type="password"
+              placeholder="******************"
+            />
+          </div>
+        </div>
+        <div class="mb-6 text-center">
+          <button
+            class="
+              w-full
+              px-4
+              py-2
+              font-bold
+              text-white
+              bg-blue-500
+              rounded-full
+              hover:bg-blue-700
+              focus:bg-blue-700
+              disabled:opacity-0
+            "
+            type="submit"
+            [disabled]="signupForm.invalid"
+          >
+            Register Account
+          </button>
+        </div>
+        <hr class="mb-6 border-t" />
+        <div class="text-center">
+          <a
+            class="
+              inline-block
+              text-lg text-blue-500
+              align-baseline
+              hover:text-blue-800
+            "
+            routerLink="/login"
+          >
+            Already have an account? Login!
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

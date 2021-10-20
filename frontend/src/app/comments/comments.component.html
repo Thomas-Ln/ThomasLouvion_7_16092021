@@ -1,0 +1,9 @@
+<div
+  *ngFor="let comment of comments"
+  id="{{ comment.id }}"
+  class="border border-red-300"
+>
+  {{ comment.createdAt | date }}
+  userId={{ comment.author_id }}
+  <p>{{ comment.content }}</p>
+</div>

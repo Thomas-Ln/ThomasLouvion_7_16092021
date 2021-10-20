@@ -1,31 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Post } from './post';
+import { Comment } from './comment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
+export class CommentsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET: all posts */
-   getAll(): Observable<Post[]> {
-    return this.http.get<Post[]>('/api/posts').pipe(
-      catchError(this.handleError<Post[]>('Posts'))
+  /** GET: all comment by post id */
+   getAllByPostId(postId: Post["id"]): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`api/comments/post/${postId}`).pipe(
+      catchError(this.handleError<Comment[]>('Comments'))
     );
   }
 
-   /** GET post by id */
-    getOneById(id: Post["id"]): Observable<Post> {
-    return this.http.get<Post>(`/api/posts/${id}`).pipe(
-      catchError(this.handleError<Post>(`getPost id=${id}`))
-    );
-  }
-
-  /**
+   /**
  * Handle Http operation that failed.
  * Let the app continue.
  * @param operation - name of the operation that failed
