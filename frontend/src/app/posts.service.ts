@@ -11,19 +11,25 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET: all posts */
-   getAll(): Observable<Post[]> {
+  createOne(post: Post): Observable<Post> {
+    return this.http.post<Post>('/api/posts', post).pipe(
+      catchError(this.handleError<Post>('addPost'))
+    )
+  }
+
+  getAll(): Observable<Post[]> {
     return this.http.get<Post[]>('/api/posts').pipe(
       catchError(this.handleError<Post[]>('Posts'))
     );
   }
 
-   /** GET post by id */
-    getOneById(id: Post["id"]): Observable<Post> {
+  getOneById(id: Post["id"]): Observable<Post> {
     return this.http.get<Post>(`/api/posts/${id}`).pipe(
       catchError(this.handleError<Post>(`getPost id=${id}`))
     );
   }
+
+
 
   /**
  * Handle Http operation that failed.

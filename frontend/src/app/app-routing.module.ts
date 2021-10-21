@@ -1,3 +1,4 @@
+import { PostFormComponent } from './post-form/post-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PostComponent } from './post/post.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
@@ -10,9 +11,15 @@ const routes: Routes = [
   { path: '', redirectTo: '/signup', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'posts', component: PostsListComponent },
-  { path: 'posts/:id', component: PostComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'posts',
+    children: [
+      { path: '', component: PostsListComponent },
+      { path: 'create', component: PostFormComponent },
+      { path: 'update/:id', component: PostFormComponent },
+      { path: ':id', component: PostComponent },
+    ]
+  },
+  { path: '**', component: PageNotFoundComponent } // must be the last route (see https://angular.io/guide/router#setting-up-wildcard-routes)
 ];
 
 @NgModule({
