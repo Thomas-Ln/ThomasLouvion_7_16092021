@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PostFormComponent } from './post-form/post-form.component';
+import { CommentFormComponent } from './comment-form/comment-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PostFormComponent } from './post-form/post-form.component';
     FooterComponent,
     PageNotFoundComponent,
     PostFormComponent,
+    CommentFormComponent,
   ],
   imports: [
     BrowserModule,

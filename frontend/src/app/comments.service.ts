@@ -12,8 +12,13 @@ export class CommentsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET: all comment by post id */
-   getAllByPostId(postId: Post["id"]): Observable<Comment[]> {
+  createOne(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>('/api/comments', comment).pipe(
+      catchError(this.handleError<Comment>('addComment'))
+    )
+  }
+
+  getAllByPostId(postId: Post["id"]): Observable<Comment[]> {
     return this.http.get<Comment[]>(`api/comments/post/${postId}`).pipe(
       catchError(this.handleError<Comment[]>('Comments'))
     );
