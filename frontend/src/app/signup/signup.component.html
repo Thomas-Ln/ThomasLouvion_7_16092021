@@ -1,7 +1,7 @@
-<div class="container mx-auto">
+<main class="container mx-auto">
   <div class="flex justify-center px-6">
     <div class="w-full lg:w-1/3 bg-white p-5 rounded-lg lg:rounded-l-none">
-      <h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
+      <h1 class="pt-4 text-2xl text-center">Créez un compte!</h1>
       <form
         [formGroup]="signupForm"
         (ngSubmit)="onSubmit()"
@@ -10,7 +10,7 @@
       >
         <div class="mb-4">
           <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
-            Name
+            Nom
           </label>
           <input
             class="
@@ -27,7 +27,7 @@
             "
             id="name"
             type="text"
-            placeholder="Name"
+            placeholder="Nom"
             formControlName="name"
           />
         </div>
@@ -61,7 +61,7 @@
               class="block mb-2 text-sm font-bold text-gray-700"
               for="password"
             >
-              Password
+              Mot de passe
             </label>
             <input
               class="
@@ -91,7 +91,7 @@
               class="block mb-2 text-sm font-bold text-gray-700"
               for="c_password"
             >
-              Confirm Password
+              Confirmer Mot de passe
             </label>
             <input
               class="
@@ -130,7 +130,7 @@
             type="submit"
             [disabled]="signupForm.invalid"
           >
-            Register Account
+            Créer le compte
           </button>
         </div>
         <hr class="mb-6 border-t" />
@@ -144,10 +144,10 @@
             "
             routerLink="/login"
           >
-            Already have an account? Login!
+            Déjà inscrit? Connectez vous!
           </a>
         </div>
       </form>
     </div>
   </div>
-</div>
+</main>
