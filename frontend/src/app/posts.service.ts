@@ -17,6 +17,16 @@ export class PostsService {
     )
   }
 
+  createOneWithImage(post: any, image: any): Observable<Post> {
+    const postData = new FormData();
+    postData.append('post', JSON.stringify(post));
+    postData.append('image', image, post.title);
+
+    return this.http.post<Post>('/api/posts', postData).pipe(
+      catchError(this.handleError<Post>('addPostWithImage'))
+    )
+  }
+
   getAll(): Observable<Post[]> {
     return this.http.get<Post[]>('/api/posts').pipe(
       catchError(this.handleError<Post[]>('Posts'))
@@ -28,8 +38,6 @@ export class PostsService {
       catchError(this.handleError<Post>(`getPost id=${id}`))
     );
   }
-
-
 
   /**
  * Handle Http operation that failed.

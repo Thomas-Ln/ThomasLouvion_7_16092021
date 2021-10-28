@@ -3,7 +3,17 @@ const sequelize = require("../config/database/connect")(Sequelize);
 const Posts = require("../models/posts")(sequelize, Sequelize);
 
 exports.create = (req, res, next) => {
-  Posts.create(req.body)
+  let postWithImage = null;
+
+  if (req.file) {
+    const postObject = JSON.parse(req.body.post);
+    postWithImage = {
+      ...postObject,
+      image: `http://localhost:3000/${req.file.filename}`,
+    };
+  }
+
+  Posts.create(postWithImage ?? req.body)
     .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };
@@ -16,9 +26,7 @@ exports.getAll = (req, res, next) => {
 
 exports.getOneById = (req, res, next) => {
   Posts.findByPk(req.params.id)
-    .then(
-      (data) => res.send(data) // + comments
-    )
+    .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };
 

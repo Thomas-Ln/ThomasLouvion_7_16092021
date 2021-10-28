@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
 const auth = require("../middlewares/auth");
-
+const multer = require("../middlewares/multer");
 const postsCtrl = require("../controllers/posts");
 
-router.post("/", auth, postsCtrl.create);
+router.post("/", auth, multer, postsCtrl.create);
 router.get("/", auth, postsCtrl.getAll);
 router.get("/:id", auth, postsCtrl.getOneById);
 router.put("/:id", auth, postsCtrl.update);

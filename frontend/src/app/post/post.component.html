@@ -3,9 +3,13 @@
     <h1 class="text-3xl">{{ post.title }}</h1>
     <article>
       <time class="text-gray-400">{{ post.createdAt | date }}</time>
-      <!-- if text else image -->
-      <p class="mt-4">{{ post.text }}</p>
-      <!-- <img src="{{ post.image }}" alt=""> -->
+      <p *ngIf="post.text" class="mt-4">{{ post.text }}</p>
+      <img
+        *ngIf="post.image"
+        class="mx-auto my-4"
+        src="{{ post.image }}"
+        alt="image de post"
+      />
     </article>
   </section>
   <section class="w-10/12 md:w-3/4 lg:w-5/12">

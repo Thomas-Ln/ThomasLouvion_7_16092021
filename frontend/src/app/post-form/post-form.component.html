@@ -1,13 +1,14 @@
 <!-- IMPORTANT -->
 <!-- input image name must be "uploaded-image" -->
-
-<div class="container mx-auto">
+<!-- <div *ngIf="">IMAGE</div> -->
+<main class="container mx-auto">
   <div class="flex justify-center px-6">
     <div class="w-full lg:w-1/3 bg-white p-5 rounded-lg lg:rounded-l-none">
       <h3 class="pt-4 text-2xl text-center">Créez un nouveau Post!</h3>
       <form
         [formGroup]="postForm"
         (ngSubmit)="onSubmit()"
+        [attr.enctype]="postType === 'image' ? 'multipart/form-data' : null"
         class="px-8 pt-6 pb-8 mb-4 bg-white rounded"
       >
         <div class="mb-4">
@@ -28,12 +29,14 @@
               appearance-none
             "
             id="title"
+            name="title"
             type="text"
             placeholder="Titre"
             formControlName="title"
           />
         </div>
-        <div class="mb-4">
+        <!-- postType Text -->
+        <div *ngIf="postType === 'text'" class="mb-4">
           <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
             Contenu
           </label>
@@ -56,6 +59,34 @@
             placeholder="Votre texte..."
             formControlName="text"
           ></textarea>
+        </div>
+        <!-- postType Image -->
+        <div *ngIf="postType === 'image'" class="mb-4">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+            Image
+          </label>
+          <input
+            class="
+              mx-auto
+              w-full
+              px-3
+              py-2
+              mb-3
+              text-sm
+              leading-tight
+              text-gray-700
+              border
+              rounded
+              shadow
+              appearance-none
+            "
+            id="image"
+            name="image"
+            type="file"
+            formControlName="image"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
         </div>
         <div class="mb-6 text-center">
           <button
@@ -80,4 +111,4 @@
       </form>
     </div>
   </div>
-</div>
+</main>

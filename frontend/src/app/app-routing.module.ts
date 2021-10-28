@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'posts',
     children: [
       { path: '', component: PostsListComponent },
-      { path: 'create', component: PostFormComponent },
+      { path: 'create/:type', component: PostFormComponent },
       { path: 'update/:id', component: PostFormComponent },
       { path: ':id', component: PostComponent },
     ]

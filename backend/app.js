@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const cors = require("cors");
 
 // Sync Database
@@ -16,6 +17,7 @@ const commentsRoutes = require("./routes/comments");
 app.use(cors());
 
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Routing
 app.use("/api/auth", usersRoutes);

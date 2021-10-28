@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from './../user';
 import { PostsService } from './../posts.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,21 +11,33 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./post-form.component.scss']
 })
 export class PostFormComponent implements OnInit {
-  postForm !: FormGroup
+  postType !: string | null;
+  postForm !: FormGroup;
   userId: User["id"] = this.auth.getUserId();
+  file?: File;
 
   constructor(
     private postsService: PostsService,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.postForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      text: ['', [Validators.required]],
-    });
+    this.postType = this.route.snapshot.paramMap.get('type');
 
+    if (this.postType === 'text') {
+      this.postForm = this.formBuilder.group({
+        title: ['', [Validators.required]],
+        text: ['', [Validators.required]],
+      });
+    } else if (this.postType === 'image') {
+      this.postForm = this.formBuilder.group({
+        title: ['', [Validators.required]],
+        image: [null, [Validators.required]],
+      });
+    }
   }
 
   onSubmit(): void {
@@ -33,17 +45,22 @@ export class PostFormComponent implements OnInit {
     Object.assign(this.postForm.value, {author_id: this.userId});
 
     if (this.postForm.valid) {
-      this.postsService.createOne(this.postForm.value).subscribe();
+      if (this.postType === 'text') {
+        this.postsService.createOne(this.postForm.value).subscribe();
+      } else if (this.postType === 'image') {
+        const post =  {
+          author_id: this.userId,
+          title: this.postForm.get('title')!.value,
+        }
+        this.postsService.createOneWithImage(post, this.file).subscribe();
+      }
+
+      this.router.navigate(['posts']);
     }
-    this.router.navigate(['posts']);
   }
 
-  /*
-    onSubmit(): void {
-    if (this.signupForm.valid) {
-      this.usersService.signup(this.signupForm.value).subscribe();
-    }
+  onFileSelected(event: any): void {
+    this.file = event.target.files[0];
   }
-  */
 
 }
