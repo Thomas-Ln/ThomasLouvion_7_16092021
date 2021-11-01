@@ -55,7 +55,7 @@ export class PostFormComponent implements OnInit {
         this.postsService.createOneWithImage(post, this.file).subscribe();
       }
 
-      this.router.navigate(['posts']);
+      this.router.navigate([`posts/${this.postType}`]);
     }
   }
 

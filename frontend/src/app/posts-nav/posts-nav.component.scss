@@ -1,0 +1,5 @@
+nav {
+  .isTabActive {
+    @apply text-blue-600 font-bold border-b-4 border-blue-600;
+  }
+}
