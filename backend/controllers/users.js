@@ -25,7 +25,7 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  Users.findOne({ email: req.body.email })
+  Users.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) {
         return res.status(404).json({ error: "Not found !" });
