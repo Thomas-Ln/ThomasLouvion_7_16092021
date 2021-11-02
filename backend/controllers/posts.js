@@ -9,7 +9,7 @@ exports.create = (req, res, next) => {
     const postObject = JSON.parse(req.body.post);
     postWithImage = {
       ...postObject,
-      image: `http://localhost:3000/${req.file.filename}`,
+      image: `http://localhost:3000/images/${req.file.filename}`,
     };
   }
 
