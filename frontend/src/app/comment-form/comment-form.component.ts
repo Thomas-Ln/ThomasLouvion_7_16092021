@@ -31,6 +31,8 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const postsType = this.route.snapshot.routeConfig?.path?.split('/')[0];
+
     // add the required "author_id" and "post_id"
     Object.assign(this.commentForm.value, {
       author_id: this.userId,
@@ -39,10 +41,10 @@ export class CommentFormComponent implements OnInit {
 
     if (this.commentForm.valid) {
       this.commentsService.createOne(this.commentForm.value).subscribe();
+      // reload url, because the comment-form-component is used in the post-component
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['posts', this.postId])
+        this.router.navigateByUrl(`posts/${postsType}/${this.postId}`)
       });
-      // this.router.navigate([this.router.url]);
     }
 
   }
