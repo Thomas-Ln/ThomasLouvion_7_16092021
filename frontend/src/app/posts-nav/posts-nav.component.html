@@ -1,14 +1,17 @@
-<nav class="w-full flex justify-center mb-12 p-4">
-  <a
-    routerLink="/posts/text"
-    routerLinkActive="isTabActive"
-    class="px-6 text-2xl"
-    >Textes</a
-  >
-  <a
-    routerLink="/posts/image"
-    routerLinkActive="isTabActive"
-    class="px-6 text-2xl"
-    >Images</a
-  >
+<nav class="w-full flex flex-col items-center mb-12 p-4">
+  <div class="w-full flex justify-center mb-4 p-4">
+    <a
+      routerLink="/posts/text"
+      routerLinkActive="isTabActive"
+      class="px-6 text-2xl"
+      >Textes</a
+    >
+    <a
+      routerLink="/posts/image"
+      routerLinkActive="isTabActive"
+      class="px-6 text-2xl"
+      >Images</a
+    >
+  </div>
+  <a routerLink="create" class="btn-info font-bold"> + Ajouter un post </a>
 </nav>

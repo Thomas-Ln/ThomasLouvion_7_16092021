@@ -16,10 +16,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'text', pathMatch: 'full' },
       { path: 'text', component: PostsListComponent },
       { path: 'image', component: PostsListComponent },
-      { path: 'create/:type', component: PostFormComponent },
+      { path: ':type/create', component: PostFormComponent },
       { path: 'update/:id', component: PostFormComponent },
-      { path: 'text/:id', component: PostComponent },
-      { path: 'image/:id', component: PostComponent },
+      { path: 'text/:id', component: PostComponent},
+      { path: 'image/:id', component: PostComponent},
     ]
   },
   { path: '**', component: PageNotFoundComponent } // must be the last route (see https://angular.io/guide/router#setting-up-wildcard-routes)
