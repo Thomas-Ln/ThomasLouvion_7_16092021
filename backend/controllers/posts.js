@@ -25,14 +25,17 @@ exports.getAll = (req, res, next) => {
 };
 
 exports.getAllByType = (req, res, next) => {
-  const postType = req.params.type;
-  const statement = `SELECT * FROM posts WHERE ${postType} IS NOT NULL`;
+  // default type 'text'
+  let statement = "SELECT * FROM posts WHERE text IS NOT NULL";
+
+  if (req.params.type === "image") {
+    statement = "SELECT * FROM posts WHERE image IS NOT NULL";
+  }
 
   sequelize
     .query(statement, {
       model: Posts,
       mapToModel: true,
-      replacements: { post_type: req.params.type },
       type: QueryTypes.SELECT,
     })
     .then((data) => res.send(data))
