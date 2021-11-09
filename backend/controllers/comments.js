@@ -33,7 +33,7 @@ exports.delete = (req, res, next) => {
     .catch((error) => res.send(error));
 };
 
-// delete all posts for one user (author_id)
+// delete all comments for one user (author_id)
 exports.clear = (req, res, next) => {
   Comments.destroy({ where: { author_id: req.params.author_id } })
     .then((data) => res.send(data))

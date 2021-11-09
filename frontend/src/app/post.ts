@@ -8,4 +8,5 @@ export interface Post {
   author_id: User["id"];
   createdAt: Date;
   updatedAt: Date;
+  moderated: true | false;
 }

@@ -20,9 +20,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    role_id: {
-      type: Sequelize.INTEGER.UNSIGNED,
+    admin: {
+      type: Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
   });
 

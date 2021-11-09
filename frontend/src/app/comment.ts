@@ -8,4 +8,5 @@ export interface Comment {
   post_id: Post["id"];
   createdAt: Date;
   updatedAt: Date;
+  moderated: true | false;
 }

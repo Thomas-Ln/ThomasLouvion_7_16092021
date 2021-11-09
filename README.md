@@ -1,11 +1,21 @@
 # Installation
 
+* Values between **[**...**]** must be replaced with your own !
+
+## MySQL
+```
+# Create a mysql database & grant all access(1)
+
+# Follow backend & frontend steps
+
+# Once you will have created user(s) (with the signup form)
+# add admin powers with this statement
+UPDATE users SET admin = 1 WHERE name = '[your_user_name]';
+```
+
 ## Backend
 ```
 cd backend
-
-# Set Database
-# create a mysql database & grant all access(1)
 
 # Set Environment
 touch .env
@@ -15,7 +25,7 @@ MYSQL_USER="[your_mysql_username]"
 MYSQL_PWD="[your_mysql_user_password]"
 JWT_KEY="[with_the_value_you_want]"
 
-# Create images/ folder ( will contain uploaded images )
+# Create images/ folder (will contain uploaded images)
 mkdir images
 
 # Install dependencies

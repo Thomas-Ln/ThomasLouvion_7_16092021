@@ -18,6 +18,11 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER.UNSIGNED,
       allowNull: false,
     },
+    moderated: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   });
 
   return Comments;
