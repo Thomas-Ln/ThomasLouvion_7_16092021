@@ -19,6 +19,7 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
 import { PostsNavComponent } from './posts-nav/posts-nav.component';
 // import { AdminComponent } from './admin/admin.component';
 import { PostsPaginationComponent } from './posts-pagination/posts-pagination.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PostsPaginationComponent } from './posts-pagination/posts-pagination.co
     PostsNavComponent,
     // AdminComponent,
     PostsPaginationComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,19 @@
+.btn-logout {
+  $svgSize: 25px;
+
+  @apply 
+  inline-flex items-center
+  mt-4
+  py-1 px-4
+  border border-gray-700 rounded-lg
+  shadow bg-transparent
+  text-sm font-semibold
+  active:bg-gray-800
+hover:bg-gray-600 hover:text-white  hover:border-transparent
+  ;
+
+  svg {
+    width: $svgSize;
+    height: $svgSize;
+  }
+}

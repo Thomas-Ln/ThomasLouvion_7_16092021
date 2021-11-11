@@ -25,6 +25,11 @@ export class UsersService {
     );
   }
 
+  /** STORAGE: remove token */
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
  /**
  * Handle Http operation that failed.
  * Let the app continue.
