@@ -1,7 +1,23 @@
 const { Sequelize, Op, QueryTypes } = require("sequelize");
 const sequelize = require("../config/database/connect")(Sequelize);
 const Posts = require("../models/posts")(sequelize, Sequelize);
+const Users = require("../models/users")(sequelize, Sequelize);
+const Comments = require("../models/comments")(sequelize, Sequelize);
 
+// Set fetch posts limit & offset for pagination
+const PAGE_LIMIT = 12;
+
+// --- Associations ---
+Users.hasMany(Posts, { foreignKey: "author_id" });
+Posts.belongsTo(Users);
+
+Users.hasMany(Comments, { foreignKey: "author_id" });
+Comments.belongsTo(Users);
+
+Posts.hasMany(Comments, { foreignKey: "post_id" });
+Comments.belongsTo(Posts);
+
+// --- Controller Methods ---
 exports.create = (req, res, next) => {
   let postWithImage = null;
 
@@ -19,31 +35,45 @@ exports.create = (req, res, next) => {
 };
 
 exports.getAll = (req, res, next) => {
-  Posts.findAll()
+  Posts.findAll({
+    include: [{ model: Users, attributes: ["name"] }],
+    order: [["createdAt", "DESC"]],
+  })
     .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };
 
-exports.getAllByType = (req, res, next) => {
-  // default type 'text'
-  let statement = "SELECT * FROM posts WHERE text IS NOT NULL";
+exports.getAllWhereImageIsNotNull = (req, res, next) => {
+  Posts.findAll({
+    where: { image: { [Op.not]: null } },
+    include: [{ model: Users, attributes: ["name"] }],
+    order: [["createdAt", "DESC"]],
+    offset: req.query.page * PAGE_LIMIT - PAGE_LIMIT,
+    limit: PAGE_LIMIT,
+  })
+    .then((data) => res.send(data))
+    .catch((error) => res.send(error));
+};
 
-  if (req.params.type === "image") {
-    statement = "SELECT * FROM posts WHERE image IS NOT NULL";
-  }
-
-  sequelize
-    .query(statement, {
-      model: Posts,
-      mapToModel: true,
-      type: QueryTypes.SELECT,
-    })
+exports.getAllWhereTextIsNotNull = (req, res, next) => {
+  Posts.findAll({
+    where: { text: { [Op.not]: null } },
+    include: [{ model: Users, attributes: ["name"] }],
+    order: [["createdAt", "DESC"]],
+    offset: req.query.page * PAGE_LIMIT - PAGE_LIMIT,
+    limit: PAGE_LIMIT,
+  })
     .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };
 
 exports.getOneById = (req, res, next) => {
-  Posts.findByPk(req.params.id)
+  Posts.findByPk(req.params.id, {
+    include: [
+      { model: Users, attributes: ["name"] },
+      { model: Comments, include: [{ model: Users, attributes: ["name"] }] },
+    ],
+  })
     .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };

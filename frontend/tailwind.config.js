@@ -9,7 +9,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundColor: ["odd", "even"],
+      backgroundColor: ["active", "odd", "even"],
       borderRadius: ["first", "last"],
     },
   },

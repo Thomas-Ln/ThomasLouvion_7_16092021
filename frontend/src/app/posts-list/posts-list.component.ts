@@ -1,7 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { PostsService } from './../posts.service';
+import { ActivatedRoute } from '@angular/router';
 import { Post } from '../post';
+import { PostsService } from './../posts.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -10,6 +10,8 @@ import { Post } from '../post';
 })
 export class PostsListComponent implements OnInit {
   posts: Post[] = [];
+  postsType: string = this.route.snapshot.url.join('');
+  page: number = Number(this.route.snapshot.queryParamMap.get('page'));
 
   constructor(
     private postsService: PostsService,
@@ -17,13 +19,13 @@ export class PostsListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPosts();
+    if (this.page < 1 || isNaN(this.page)) this.page = 1;
+    this.getPosts(this.page);
   }
 
-  getPosts(): void {
-    const postsType = this.route.snapshot.routeConfig?.path;
-    if (postsType != undefined) {
-        this.postsService.getAllByType(postsType)
+  getPosts(page: number): void {
+    if (this.postsType != undefined) {
+        this.postsService.getAllByType(this.postsType, page)
         .subscribe(posts => this.posts = posts)
     } else {
       console.error('Error: PostType undefined !');

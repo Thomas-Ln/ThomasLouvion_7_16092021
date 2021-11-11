@@ -17,6 +17,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PostFormComponent } from './post-form/post-form.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { PostsNavComponent } from './posts-nav/posts-nav.component';
+// import { AdminComponent } from './admin/admin.component';
+import { PostsPaginationComponent } from './posts-pagination/posts-pagination.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { PostsNavComponent } from './posts-nav/posts-nav.component';
     PostFormComponent,
     CommentFormComponent,
     PostsNavComponent,
+    // AdminComponent,
+    PostsPaginationComponent,
   ],
   imports: [
     BrowserModule,

@@ -36,8 +36,8 @@ export class PostsService {
   /**
    * Fetch only text OR image posts
    */
-  getAllByType(type: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`/api/posts/type/${type}`).pipe(
+  getAllByType(type: string, page: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`/api/posts/type/${type}?page=${page}`).pipe(
       catchError(this.handleError<Post[]>('Posts'))
     );
   }
