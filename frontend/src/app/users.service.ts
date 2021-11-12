@@ -22,14 +22,20 @@ export class UsersService {
   login(user: User): Observable<Token> {
     return this.http.post<Token>('api/auth/login', user).pipe(
       catchError(this.handleError<Token>('Login'))
-    );
-  }
+      );
+    }
 
   /** STORAGE: remove token */
   logout(): void {
     localStorage.removeItem('token');
   }
 
+  /** POST: delete user by id */
+  deleteAccount(userId: User['id']): Observable<any> {
+    return this.http.delete<any>((`api/auth/${userId}`)).pipe(
+      catchError(this.handleError<any>('DeleteAccount'))
+    )
+  }
  /**
  * Handle Http operation that failed.
  * Let the app continue.

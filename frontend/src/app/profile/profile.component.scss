@@ -1,0 +1,12 @@
+.btn-danger {
+  @apply 
+  inline-flex items-center
+  mt-4
+  py-1 px-4
+  border-2 border-red-600 rounded-lg
+  shadow bg-transparent
+  text-red-600 text-sm font-semibold
+  active:bg-red-800
+hover:bg-red-600 hover:text-white  hover:border-transparent
+  ;
+}

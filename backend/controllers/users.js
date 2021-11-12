@@ -1,7 +1,6 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, QueryTypes } = require("sequelize");
 const sequelize = require("../config/database/connect")(Sequelize);
 const Users = require("../models/users")(sequelize, Sequelize);
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -48,4 +47,24 @@ exports.login = (req, res, next) => {
         .catch((error) => res.status(500).json({ error }));
     })
     .catch((error) => res.status(500).json({ error }));
+};
+
+// exports.getRole = (req, res, next) => {
+//   const statement = "SELECT admin FROM users WHERE id = :user_id";
+
+//   sequelize
+//     .query(statement, {
+//       model: Users,
+//       mapToDel: true,
+//       replacements: { user_id: req.params.userId },
+//       type: QueryTypes.SELECT,
+//     })
+//     .then((data) => res.send(data))
+//     .catch((error) => res.send(error));
+// };
+
+exports.delete = (req, res, next) => {
+  Users.destroy({ where: { id: req.params.userId } })
+    .then((data) => res.send(data))
+    .catch((error) => res.send(error));
 };
