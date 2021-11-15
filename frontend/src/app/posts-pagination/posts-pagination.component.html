@@ -20,6 +20,7 @@
   </a>
 
   <a
+    *ngIf="!isLastPage()"
     [routerLink]="[]"
     [queryParams]="{ page: page + 1 }"
     class="btn-pagination rounded-r-2xl"

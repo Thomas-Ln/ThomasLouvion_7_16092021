@@ -8,6 +8,7 @@ const Comments = require("../models/comments")(sequelize, Sequelize);
 const PAGE_LIMIT = 12;
 
 // ASSOCIATIONS
+// ------------
 Users.hasMany(Posts);
 Posts.belongsTo(Users, { foreignKey: "user_id" });
 
@@ -18,6 +19,7 @@ Posts.hasMany(Comments, { foreignKey: "post_id" });
 Comments.belongsTo(Posts);
 
 // CONTROLLER METHODS
+// ------------------
 exports.create = (req, res, next) => {
   let postWithImage = null;
 
@@ -44,7 +46,7 @@ exports.getAll = (req, res, next) => {
 };
 
 exports.getAllWhereImageIsNotNull = (req, res, next) => {
-  Posts.findAll({
+  Posts.findAndCountAll({
     where: { image: { [Op.not]: null } },
     include: [{ model: Users, attributes: ["name"] }],
     order: [["createdAt", "DESC"]],
@@ -56,7 +58,7 @@ exports.getAllWhereImageIsNotNull = (req, res, next) => {
 };
 
 exports.getAllWhereTextIsNotNull = (req, res, next) => {
-  Posts.findAll({
+  Posts.findAndCountAll({
     where: { text: { [Op.not]: null } },
     include: [{ model: Users, attributes: ["name"] }],
     order: [["createdAt", "DESC"]],

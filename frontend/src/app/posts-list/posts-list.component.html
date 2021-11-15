@@ -38,5 +38,8 @@
       </a>
     </article>
   </section>
-  <app-posts-pagination (pageChange)="getPosts($event)"></app-posts-pagination>
+  <app-posts-pagination
+    [totalPosts]="totalPosts"
+    (pageChange)="getPosts($event)"
+  ></app-posts-pagination>
 </main>

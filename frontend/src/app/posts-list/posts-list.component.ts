@@ -12,6 +12,7 @@ export class PostsListComponent implements OnInit {
   posts: Post[] = [];
   postsType: string = this.route.snapshot.url.join('');
   page: number = Number(this.route.snapshot.queryParamMap.get('page'));
+  totalPosts: number = Number();
 
   constructor(
     private postsService: PostsService,
@@ -25,8 +26,11 @@ export class PostsListComponent implements OnInit {
 
   getPosts(page: number): void {
     if (this.postsType != undefined) {
-        this.postsService.getAllByType(this.postsType, page)
-        .subscribe(posts => this.posts = posts)
+      this.postsService.getAllByType(this.postsType, page)
+      .subscribe(posts => {
+        this.posts = posts.rows;
+        this.totalPosts = posts.count;
+      })
     } else {
       console.error('Error: PostType undefined !');
     }
