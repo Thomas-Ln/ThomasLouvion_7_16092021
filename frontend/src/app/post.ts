@@ -5,7 +5,7 @@ export interface Post {
   title: string;
   text: string | null;
   image: string | null;
-  author_id: User["id"];
+  user_id: User["id"];
   createdAt: Date;
   updatedAt: Date;
   moderated: true | false;

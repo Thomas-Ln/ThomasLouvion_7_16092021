@@ -7,17 +7,17 @@ const Comments = require("../models/comments")(sequelize, Sequelize);
 // Set fetch posts limit & offset for pagination
 const PAGE_LIMIT = 12;
 
-// --- Associations ---
-Users.hasMany(Posts, { foreignKey: "author_id" });
-Posts.belongsTo(Users);
+// ASSOCIATIONS
+Users.hasMany(Posts);
+Posts.belongsTo(Users, { foreignKey: "user_id" });
 
-Users.hasMany(Comments, { foreignKey: "author_id" });
-Comments.belongsTo(Users);
+Users.hasMany(Comments);
+Comments.belongsTo(Users, { foreignKey: "user_id" });
 
 Posts.hasMany(Comments, { foreignKey: "post_id" });
 Comments.belongsTo(Posts);
 
-// --- Controller Methods ---
+// CONTROLLER METHODS
 exports.create = (req, res, next) => {
   let postWithImage = null;
 
@@ -87,12 +87,5 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
   Posts.destroy({ where: { id: req.params.id } })
     .then((data) => res.json("Post deleted !"))
-    .catch((error) => res.send(error));
-};
-
-// delete all comments for one user (author_id)
-exports.clear = (req, res, next) => {
-  Posts.destroy({ where: { author_id: req.params.author_id } })
-    .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };

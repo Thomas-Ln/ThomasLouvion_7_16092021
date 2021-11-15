@@ -13,18 +13,12 @@ module.exports = (sequelize, Sequelize) => {
 
   // Associations
   // User has many Posts
-  db.users.hasMany(db.posts, {
-    foreignKey: "author_id",
-    onDelete: "CASCADE",
-  });
-  db.posts.belongsTo(db.users);
+  db.users.hasMany(db.posts, { onDelete: "CASCADE" });
+  db.posts.belongsTo(db.users, { foreignKey: "user_id" });
 
   // User has many Comments
-  db.users.hasMany(db.comments, {
-    foreignKey: "author_id",
-    onDelete: "CASCADE",
-  });
-  db.comments.belongsTo(db.users);
+  db.users.hasMany(db.comments, { onDelete: "CASCADE" });
+  db.comments.belongsTo(db.users, { foreignKey: "user_id" });
 
   // Post has many Comments
   db.posts.hasMany(db.comments, {

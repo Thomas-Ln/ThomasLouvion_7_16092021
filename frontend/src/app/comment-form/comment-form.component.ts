@@ -21,7 +21,7 @@ export class CommentFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -33,9 +33,9 @@ export class CommentFormComponent implements OnInit {
   onSubmit(): void {
     const postsType = this.route.snapshot.routeConfig?.path?.split('/')[0];
 
-    // add the required "author_id" and "post_id"
+    // add the required "user_id" and "post_id"
     Object.assign(this.commentForm.value, {
-      author_id: this.userId,
+      user_id: this.userId,
       post_id: this.postId
     });
 

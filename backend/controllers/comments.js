@@ -8,7 +8,6 @@ exports.create = (req, res, next) => {
     .catch((error) => res.send(error));
 };
 
-// get all comments for one post
 exports.getAllByPost = (req, res, next) => {
   Comments.findAll({ where: { post_id: req.params.post_id } })
     .then((data) => res.send(data))
@@ -30,12 +29,5 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
   Comments.destroy({ where: { id: req.params.id } })
     .then((data) => res.json("Comment deleted !"))
-    .catch((error) => res.send(error));
-};
-
-// delete all comments for one user (author_id)
-exports.clear = (req, res, next) => {
-  Comments.destroy({ where: { author_id: req.params.author_id } })
-    .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };

@@ -41,15 +41,15 @@ export class PostFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // add the required "author_id"
-    Object.assign(this.postForm.value, {author_id: this.userId});
+    // add the required "user_id"
+    Object.assign(this.postForm.value, {user_id: this.userId});
 
     if (this.postForm.valid) {
       if (this.postType === 'text') {
         this.postsService.createOne(this.postForm.value).subscribe();
       } else if (this.postType === 'image') {
         const post =  {
-          author_id: this.userId,
+          user_id: this.userId,
           title: this.postForm.get('title')!.value,
         }
         this.postsService.createOneWithImage(post, this.file).subscribe();
