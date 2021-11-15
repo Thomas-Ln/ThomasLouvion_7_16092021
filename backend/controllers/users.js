@@ -1,8 +1,41 @@
 const { Sequelize, QueryTypes } = require("sequelize");
 const sequelize = require("../config/database/connect")(Sequelize);
-const Users = require("../models/users")(sequelize, Sequelize);
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Users = require("../models/users")(sequelize, Sequelize);
+const Posts = require("../models/posts")(sequelize, Sequelize);
+const Comments = require("../models/comments")(sequelize, Sequelize);
+
+// ASSOCIATIONS
+// ------------
+Users.hasMany(Posts);
+Posts.belongsTo(Users, { foreignKey: "user_id" });
+
+Users.hasMany(Comments);
+Comments.belongsTo(Users, { foreignKey: "user_id" });
+
+Posts.hasMany(Comments, { foreignKey: "post_id" });
+Comments.belongsTo(Posts);
+
+// CONTROLLER METHODS
+// ------------------
+/** Fetch user name, email, posts number, comments number */
+exports.getProfile = (req, res, next) => {
+  const statement = `
+    SELECT u.name, u.email, u.created_at,
+    (SELECT COUNT(p.id) FROM posts p WHERE user_id = :user_id) AS posts,
+    (SELECT COUNT(c.id) FROM comments c WHERE user_id = :user_id) AS comments
+    FROM users u WHERE u.id = :user_id;
+  `;
+
+  sequelize
+    .query(statement, {
+      replacements: { user_id: req.params.userId },
+      type: QueryTypes.SELECT,
+    })
+    .then((data) => res.send(data))
+    .catch((error) => res.send(error));
+};
 
 // exports.getRole = (req, res, next) => {
 //   const statement = "SELECT admin FROM users WHERE id = :user_id";

@@ -11,6 +11,13 @@ import { Token } from './token';
 export class UsersService {
   constructor(private http: HttpClient) { }
 
+  /**GET: name & email of user */
+  getProfile(userId: User['id']): Observable<any> {
+    return this.http.get<any>(`/api/auth/profile/${userId}`).pipe(
+      catchError(this.handleError<any>('Profile'))
+    )
+  }
+
   /** POST: create new user */
   signup(user: User): Observable<string> {
     return this.http.post<string>('/api/auth/signup', user).pipe(
