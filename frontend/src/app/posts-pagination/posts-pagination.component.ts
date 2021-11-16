@@ -7,17 +7,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./posts-pagination.component.scss']
 })
 export class PostsPaginationComponent implements OnInit {
-  @Input() totalPosts = 0;
+  @Input() page = 0;
+  @Input() totalPages = 0;
   @Output() pageChange = new EventEmitter();
 
-  page: number = Number(this.route.snapshot.queryParamMap.get('page'));;
-
-  constructor(private route: ActivatedRoute) {
-    if (this.page < 1 || isNaN(this.page)) this.page = 1;
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
+  /** @summary Update .btn-pagination routerlink number page when clicking on Prev/Next */
   reload(n: number) {
     if (this.page < 1 || isNaN(this.page)) this.page = 1;
 
@@ -25,18 +23,11 @@ export class PostsPaginationComponent implements OnInit {
     this.ngOnInit();
   }
 
-  /** @summary Used by the view to decide if Next button must be display */
+  /** @summary Decide if Next button must be display in the view */
   isLastPage() {
-    /**
-     * @see backend/controllers/posts.js PAGE_LIMIT - the two value must be equal
-     * @todo find a better architecture for this
-     */
-    const limitOfPostsByPage = 12;
-
-    const totalPages = this.totalPosts / limitOfPostsByPage;
-
-    if (totalPages === this.page) return true;
-    if (!Number.isInteger(totalPages) && Math.ceil(totalPages) === this.page) return true;
+    if (this.totalPages <= 0) return true;
+    if (this.totalPages === this.page) return true;
+    if (!Number.isInteger(this.totalPages) && Math.ceil(this.totalPages) === this.page) return true;
 
     return false;
   }

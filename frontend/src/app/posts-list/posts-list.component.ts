@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../post';
 import { PostsService } from './../posts.service';
 
@@ -12,10 +12,12 @@ export class PostsListComponent implements OnInit {
   posts: Post[] = [];
   postsType: string = this.route.snapshot.url.join('');
   page: number = Number(this.route.snapshot.queryParamMap.get('page'));
-  totalPosts: number = Number();
+  totalPages: number = Number();
+  postsByPage:number = 12; // must be equal to POST_LIMIT in backend/controllers/posts
 
   constructor(
     private postsService: PostsService,
+    private router: Router,
     private route: ActivatedRoute,
   ) { }
 
@@ -24,15 +26,25 @@ export class PostsListComponent implements OnInit {
     this.getPosts(this.page);
   }
 
+  /** @summary Fetch Posts */
   getPosts(page: number): void {
-    if (this.postsType != undefined) {
+    if (this.postsType != undefined ) {
       this.postsService.getAllByType(this.postsType, page)
       .subscribe(posts => {
         this.posts = posts.rows;
-        this.totalPosts = posts.count;
+        this.totalPages = posts.count / this.postsByPage;
+        this.handlePageOverflow();
       })
-    } else {
-      console.error('Error: PostType undefined !');
     }
   }
+
+  /** @summary If page > totalPages return to totalPages */
+  handlePageOverflow() {
+    if(this.totalPages > 0 && this.page > Math.ceil(this.totalPages)) {
+      this.router.navigateByUrl(`/posts/${this.postsType}?page=${Math.ceil(this.totalPages)}`);
+      this.page = Math.ceil(this.totalPages); // reset page to totalPages
+      this.ngOnInit(); // reload component ( will call getPosts(totalPages) )
+    }
+  }
+
 }
