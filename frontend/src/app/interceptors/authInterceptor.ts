@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import { catchError,tap} from 'rxjs/operators';
@@ -7,7 +8,10 @@ import { throwError } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const token = this.auth.getToken();
@@ -17,14 +21,9 @@ export class AuthInterceptor implements HttpInterceptor {
     });
 
     return next.handle(authReq).pipe(
-      tap(event => {
-        if(event instanceof HttpResponse) {
-          console.log(event.status);
-        }
-      }),
       catchError(error => {
         if(error.status === 401) {
-          console.error('Auth required');
+          this.router.navigate(['login'])
           return throwError(error);
         }
         return throwError(error);

@@ -24,6 +24,12 @@ export class CommentsService {
     );
   }
 
+  getAllByPostForAdmin(postId: Post["id"]): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`api/comments/admin/${postId}`).pipe(
+      catchError(this.handleError<Comment[]>('Comments'))
+    );
+  }
+
    /**
  * Handle Http operation that failed.
  * Let the app continue.

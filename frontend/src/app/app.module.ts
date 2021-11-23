@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin/admin.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,11 +20,12 @@ import { PostsNavComponent } from './posts-nav/posts-nav.component';
 import { PostsPaginationComponent } from './posts-pagination/posts-pagination.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
+import { AdminCommentsComponent } from './admin-comments/admin-comments.component';
 
 
 @NgModule({
   declarations: [
-    // AdminComponent,
+    AdminComponent,
     AppComponent,
     CommentFormComponent,
     CommentsComponent,
@@ -40,6 +41,7 @@ import { SignupComponent } from './signup/signup.component';
     PostsPaginationComponent,
     ProfileComponent,
     SignupComponent,
+    AdminCommentsComponent,
   ],
   imports: [
     BrowserModule,

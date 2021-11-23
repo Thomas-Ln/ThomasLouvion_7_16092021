@@ -37,20 +37,22 @@ exports.getProfile = (req, res, next) => {
     .catch((error) => res.send(error));
 };
 
-// exports.getRole = (req, res, next) => {
-//   const statement = "SELECT admin FROM users WHERE id = :user_id";
+/** Extract userId from headers Authorization Bearer token
+ *  then fetch the admin column for this userId
+ * @returns Object { admin: status } where status == true or false */
+exports.getRole = (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+  const userId = decodedToken.userId;
 
-//   sequelize
-//     .query(statement, {
-//       model: Users,
-//       mapToDel: true,
-//       replacements: { user_id: req.params.userId },
-//       type: QueryTypes.SELECT,
-//     })
-//     .then((data) => res.send(data))
-//     .catch((error) => res.send(error));
-// };
+  Users.findByPk(userId, {
+    attributes: ["admin"],
+  })
+    .then((data) => res.send(data))
+    .catch((error) => res.send(error));
+};
 
+/** Create a new USER */
 exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -70,6 +72,9 @@ exports.signup = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+/** Check if USER exists and check his password,
+ * if it's the correct one: return the user ID & a Json Web Token.
+ * ( This token will grant access to all routes which require an authorization ) */
 exports.login = (req, res, next) => {
   Users.findOne({ where: { email: req.body.email } })
     .then((user) => {
@@ -96,6 +101,8 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+/** Delete USER
+ *  & delete cascade his POSTS & COMMENTS */
 exports.delete = (req, res, next) => {
   Users.destroy({ where: { id: req.params.userId } })
     .then((data) => res.send(data))
