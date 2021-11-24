@@ -7,9 +7,17 @@ import { AuthService } from './../auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isLogged: boolean = this.auth.getToken() != null;
+  isLogged: boolean = this.authService.getToken() != null;
+  isAdmin: boolean = false;
 
-  constructor(private auth: AuthService) { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.isLogged) {
+      this.authService.getUserRole().subscribe(role => {
+        this.isAdmin = Boolean(role.admin);
+      });
+    }
+  }
+
 }
