@@ -6,6 +6,7 @@
     <a
       *ngIf="isAdmin"
       routerLink="/admin"
+      [queryParams]="{ page: 1 }"
       class="
         w-full
         inline-flex

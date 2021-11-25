@@ -155,5 +155,10 @@
         </tr>
       </tbody>
     </table>
+    <app-posts-pagination
+      [page]="page"
+      [totalPages]="totalPages"
+      (pageChange)="getPosts($event)"
+    ></app-posts-pagination>
   </section>
 </main>

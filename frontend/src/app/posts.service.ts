@@ -27,9 +27,9 @@ export class PostsService {
     )
   }
 
-  getAll(): Observable<Post[]> {
-    return this.http.get<Post[]>('/api/posts').pipe(
-      catchError(this.handleError<Post[]>('Posts'))
+  getAll(page: number): Observable<any> {
+    return this.http.get<any>(`/api/posts?page=${page}`).pipe(
+      catchError(this.handleError<any>('Posts'))
     );
   }
 
