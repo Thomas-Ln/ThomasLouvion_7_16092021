@@ -21,6 +21,7 @@ import { PostsPaginationComponent } from './posts-pagination/posts-pagination.co
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminCommentsComponent } from './admin-comments/admin-comments.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AdminCommentsComponent } from './admin-comments/admin-comments.componen
     ProfileComponent,
     SignupComponent,
     AdminCommentsComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
