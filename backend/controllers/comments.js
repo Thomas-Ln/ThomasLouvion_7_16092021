@@ -17,6 +17,9 @@ Comments.belongsTo(Posts);
 
 // CONTROLLER METHODS
 // ------------------
+// Set fetch items limit for pagination
+const PAGE_LIMIT = 24;
+
 exports.create = (req, res, next) => {
   Comments.create(req.body)
     .then((data) => res.send(data))
@@ -24,11 +27,14 @@ exports.create = (req, res, next) => {
 };
 
 exports.getAllByPostForAdmin = (req, res, next) => {
-  Comments.findAll({
+  Comments.findAndCountAll({
     where: {
       post_id: req.params.id,
     },
     include: { model: Users, attributes: ["name"] },
+    order: [["createdAt", "DESC"]],
+    offset: (req.query.page - 1) * PAGE_LIMIT,
+    limit: PAGE_LIMIT,
   })
     .then((data) => res.send(data))
     .catch((error) => res.send(error));

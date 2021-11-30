@@ -31,7 +31,7 @@ export class PaginationService {
   handleOverflow(route: string) {
     if (this.totalPages > 0 && this.page > this.totalPages) {
       this.page = this.totalPages; // set to last page
-      window.location.assign(`/${route}?page=${this.totalPages}`);
+      window.location.assign(`${route}?page=${this.totalPages}`);
     }
   }
 

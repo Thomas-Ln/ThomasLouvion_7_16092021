@@ -82,5 +82,9 @@
         </tr>
       </tbody>
     </table>
+    <app-pagination
+      *ngIf="contentHasLoaded"
+      (pageChange)="getComments($event)"
+    ></app-pagination>
   </section>
 </main>

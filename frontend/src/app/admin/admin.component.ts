@@ -30,14 +30,13 @@ export class AdminComponent implements OnInit {
     .subscribe(posts => {
       this.posts = posts.rows;
       this.paginationService.totalPages = Math.ceil(posts.count / this.paginationService.postsByPage);
-      this.paginationService.handleOverflow('admin');
+      this.paginationService.handleOverflow('/admin');
       this.contentHasLoaded = true;
     });
   }
 
   onCheck(value: boolean, type: 'posts' | 'comments', id: number) {
     this.authService.moderate(value, type, id).subscribe(() =>{
-      this.paginationService.page = this.paginationService.getActivePage();
       this.ngOnInit()
     });
   }

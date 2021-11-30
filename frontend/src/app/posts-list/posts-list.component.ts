@@ -33,7 +33,7 @@ export class PostsListComponent implements OnInit {
       .subscribe(posts => {
         this.posts = posts.rows;
         this.paginationService.totalPages = Math.ceil(posts.count / this.paginationService.postsByPage);
-        this.paginationService.handleOverflow(`posts/${this.postsType}`);
+        this.paginationService.handleOverflow(`/posts/${this.postsType}`);
         this.contentHasLoaded = true;
       })
     }
