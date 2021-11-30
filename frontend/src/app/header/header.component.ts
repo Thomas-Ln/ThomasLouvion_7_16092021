@@ -1,3 +1,4 @@
+import { PaginationService } from './../pagination.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../auth.service';
 
@@ -10,7 +11,9 @@ export class HeaderComponent implements OnInit {
   isLogged: boolean = this.authService.getToken() != null;
   isAdmin: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private paginationService: PaginationService) { }
 
   ngOnInit(): void {
     if (this.isLogged) {
@@ -18,6 +21,10 @@ export class HeaderComponent implements OnInit {
         this.isAdmin = Boolean(role.admin);
       });
     }
+  }
+
+  goToFirstPage() {
+    this.paginationService.page = 1;
   }
 
 }

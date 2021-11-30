@@ -1,12 +1,16 @@
 <header class="flex flex-col items-center mb-4 pt-8">
-  <a routerLink="/posts/text" [queryParams]="{ page: 1 }" class="max-w-xs">
+  <a 
+    routerLink="/posts/text" 
+    (click)="goToFirstPage()" 
+    class="max-w-xs"
+  >
     <img src="assets/icon-left-font-monochrome-black.svg" alt="Logo du site" />
   </a>
   <nav class="">
     <a
       *ngIf="isAdmin"
       routerLink="/admin"
-      [queryParams]="{ page: 1 }"
+      (click)="goToFirstPage()"
       class="
         w-full
         inline-flex

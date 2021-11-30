@@ -1,3 +1,4 @@
+import { PaginationService } from './../pagination.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posts-nav.component.scss']
 })
 export class PostsNavComponent implements OnInit {
+  constructor(private paginationService: PaginationService) { }
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  goToFirstPage() {
+    this.paginationService.page = 1;
   }
 }
