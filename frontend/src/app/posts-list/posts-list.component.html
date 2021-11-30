@@ -38,9 +38,8 @@
       </a>
     </article>
   </section>
-  <app-posts-pagination
-    [page]="page"
-    [totalPages]="totalPages"
+  <app-pagination
+    *ngIf="contentHasLoaded"
     (pageChange)="getPosts($event)"
-  ></app-posts-pagination>
+  ></app-pagination>
 </main>

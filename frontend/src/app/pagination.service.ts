@@ -28,10 +28,10 @@ export class PaginationService {
     if (this.page < 1) this.page = 1;
   }
 
-  handleOverflow() {
+  handleOverflow(route: string) {
     if (this.totalPages > 0 && this.page > this.totalPages) {
       this.page = this.totalPages; // set to last page
-      window.location.assign(`/admin?page=${this.totalPages}`);
+      window.location.assign(`/${route}?page=${this.totalPages}`);
     }
   }
 

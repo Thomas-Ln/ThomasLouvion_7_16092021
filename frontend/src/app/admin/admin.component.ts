@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
     .subscribe(posts => {
       this.posts = posts.rows;
       this.paginationService.totalPages = Math.ceil(posts.count / this.paginationService.postsByPage);
-      this.paginationService.handleOverflow();
+      this.paginationService.handleOverflow('admin');
       this.contentHasLoaded = true;
     });
   }
