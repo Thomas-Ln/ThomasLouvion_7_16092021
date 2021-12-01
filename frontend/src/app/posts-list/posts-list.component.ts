@@ -1,7 +1,8 @@
-import { PaginationService } from './../pagination.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { PaginationType } from '../pagination-type';
 import { Post } from '../post';
+import { PaginationService } from './../pagination.service';
 import { PostsService } from './../posts.service';
 
 @Component({
@@ -10,9 +11,10 @@ import { PostsService } from './../posts.service';
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostsListComponent implements OnInit {
-  contentHasLoaded: boolean = false;
   posts: Post[] = [];
   postsType: string = this.route.snapshot.url.join('');
+  paginationType: PaginationType = 'prevNext';
+  contentHasLoaded: boolean = false;
 
   constructor(
     private postsService: PostsService,

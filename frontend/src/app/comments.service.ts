@@ -18,15 +18,15 @@ export class CommentsService {
     )
   }
 
-  getAllByPostId(postId: Post["id"]): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`api/comments/post/${postId}`).pipe(
-      catchError(this.handleError<Comment[]>('Comments'))
+  getAllByPostId(postId: Post["id"], page: number): Observable<any> {
+    return this.http.get<any>(`api/comments/post/${postId}?page=${page}`).pipe(
+      catchError(this.handleError<any>('Comments'))
     );
   }
 
-  getAllByPostForAdmin(postId: Post["id"]): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`api/comments/admin/${postId}`).pipe(
-      catchError(this.handleError<Comment[]>('Comments'))
+  getAllByPostForAdmin(postId: Post["id"], page: number): Observable<any> {
+    return this.http.get<any>(`api/comments/admin/${postId}?page=${page}`).pipe(
+      catchError(this.handleError<any>('Comments'))
     );
   }
 

@@ -84,6 +84,7 @@
     </table>
     <app-pagination
       *ngIf="contentHasLoaded"
+      [paginationType]="paginationType"
       (pageChange)="getComments($event)"
     ></app-pagination>
   </section>

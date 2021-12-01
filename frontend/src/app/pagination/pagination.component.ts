@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pagination } from '../pagination';
 import { PaginationService } from './../pagination.service';
 
@@ -8,6 +8,7 @@ import { PaginationService } from './../pagination.service';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, Pagination {
+  @Input() paginationType: string = '';
   @Output() pageChange = new EventEmitter();
 
   page: number = 0;
@@ -24,7 +25,9 @@ export class PaginationComponent implements OnInit, Pagination {
 
   updatePage(n: number) {
     this.paginationService.page = this.page + n;
+
     this.ngOnInit();
+
   }
 
 }

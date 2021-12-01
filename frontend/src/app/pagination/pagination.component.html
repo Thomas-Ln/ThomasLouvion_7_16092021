@@ -1,4 +1,4 @@
-<nav class="flex my-6">
+<nav *ngIf="paginationType === 'prevNext'" class="flex my-6">
   <a
     *ngIf="page > 1"
     [routerLink]="[]"
@@ -38,4 +38,14 @@
       <path d="M0 0h48v48h-48z" fill="none" />
     </svg>
   </a>
+</nav>
+
+<nav *ngIf="paginationType === 'loadMore'" class="flex my-6">
+  <button
+    *ngIf="!isLastPage"
+    class="btn-info rounded-r-2xl"
+    (click)="[pageChange.emit(page + 1), updatePage(1)]"
+  >
+    Charger plus
+  </button>
 </nav>

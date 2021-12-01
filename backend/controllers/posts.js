@@ -107,12 +107,7 @@ exports.getAllWhereTextIsNotNull = (req, res, next) => {
 
 /** Fetch ONE post by id + join author name & comments */
 exports.getOneById = (req, res, next) => {
-  Posts.findByPk(req.params.id, {
-    include: [
-      { model: Users, attributes: ["name"] },
-      { model: Comments, include: [{ model: Users, attributes: ["name"] }] },
-    ],
-  })
+  Posts.findByPk(req.params.id)
     .then((data) => res.send(data))
     .catch((error) => res.send(error));
 };

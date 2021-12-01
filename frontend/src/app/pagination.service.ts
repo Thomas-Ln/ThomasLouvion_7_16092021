@@ -17,7 +17,7 @@ export class PaginationService {
   }
 
   isLastPage() {
-    return (this.totalPages === this.page) ? true : false;
+    return (this.totalPages === 0 || this.totalPages === this.page) ? true : false;
   }
 
   handleIsNaN() {
@@ -30,7 +30,7 @@ export class PaginationService {
 
   handleOverflow(route: string) {
     if (this.totalPages > 0 && this.page > this.totalPages) {
-      this.page = this.totalPages; // set to last page
+      this.page = this.totalPages;
       window.location.assign(`${route}?page=${this.totalPages}`);
     }
   }

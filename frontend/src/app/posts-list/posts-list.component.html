@@ -40,6 +40,7 @@
   </section>
   <app-pagination
     *ngIf="contentHasLoaded"
+    [paginationType]="paginationType"
     (pageChange)="getPosts($event)"
   ></app-pagination>
 </main>

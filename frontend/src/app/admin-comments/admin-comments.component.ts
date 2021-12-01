@@ -1,8 +1,9 @@
-import { PaginationService } from './../pagination.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { CommentsService } from './../comments.service';
+import { PaginationType } from './../pagination-type';
+import { PaginationService } from './../pagination.service';
 import { Post } from './../post';
 
 @Component({
@@ -12,9 +13,10 @@ import { Post } from './../post';
 })
 export class AdminCommentsComponent implements OnInit {
  comments: any[] = [];
- contentHasLoaded: boolean = false;
  postId: Post["id"] = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
  postUrl: string = this.router.url.replace('admin', 'posts');
+ paginationType: PaginationType = 'prevNext';
+ contentHasLoaded: boolean = false;
 
   constructor(
     private authService: AuthService,

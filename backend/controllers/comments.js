@@ -41,12 +41,14 @@ exports.getAllByPostForAdmin = (req, res, next) => {
 };
 
 exports.getAllByPost = (req, res, next) => {
-  Comments.findAll({
+  Comments.findAndCountAll({
     where: {
       post_id: req.params.id,
       moderated: { [Op.eq]: 0 },
     },
     include: { model: Users, attributes: ["name"] },
+    offset: (req.query.page - 1) * PAGE_LIMIT,
+    limit: PAGE_LIMIT,
   })
     .then((data) => res.send(data))
     .catch((error) => res.send(error));

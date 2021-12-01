@@ -9,9 +9,15 @@
     last:rounded-b-xl
   "
 >
-  <span class="text-blue-500 mr-4">userId={{ comment.user_id }}</span>
-  <time class="text-gray-400 float-right">{{
+  <span class="mr-4 text-blue-500 font-bold">{{ comment.user!.name }}</span>
+  <time class="float-right text-gray-400">{{
     comment.createdAt | date: "medium"
   }}</time>
   <p class="mt-2">{{ comment.content }}</p>
 </article>
+
+<app-pagination
+  *ngIf="contentHasLoaded"
+  [paginationType]="paginationType"
+  (pageChange)="getCommentsOfPost($event)"
+></app-pagination>
