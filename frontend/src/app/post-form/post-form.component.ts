@@ -52,7 +52,7 @@ export class PostFormComponent implements OnInit {
           user_id: this.userId,
           title: this.postForm.get('title')!.value,
         }
-        this.postsService.createOneWithImage(post, this.file).subscribe();
+        this.postsService.createOneWithImage(post, this.file!).subscribe();
       }
 
       this.router.navigate([`posts/${this.postType}`]);

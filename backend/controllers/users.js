@@ -33,7 +33,7 @@ exports.getProfile = (req, res, next) => {
       replacements: { user_id: req.params.userId },
       type: QueryTypes.SELECT,
     })
-    .then((data) => res.send(data))
+    .then((data) => res.send(data[0]))
     .catch((error) => res.send(error));
 };
 

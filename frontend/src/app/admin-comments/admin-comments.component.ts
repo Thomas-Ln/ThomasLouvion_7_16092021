@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { CommentsService } from './../comments.service';
-import { PaginationType } from './../pagination-type';
 import { PaginationService } from './../pagination.service';
+import { PaginationType } from './../pagination-type';
 import { Post } from './../post';
+import { Comment } from '../comment';
 
 @Component({
   selector: 'app-admin-comments',
@@ -12,7 +13,7 @@ import { Post } from './../post';
   styleUrls: ['./admin-comments.component.scss']
 })
 export class AdminCommentsComponent implements OnInit {
- comments: any[] = [];
+ comments: Comment[] = [];
  postId: Post["id"] = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
  postUrl: string = this.router.url.replace('admin', 'posts');
  paginationType: PaginationType = 'prevNext';
@@ -36,7 +37,7 @@ export class AdminCommentsComponent implements OnInit {
   getComments(page: number) {
     this.commentsService.getAllByPostForAdmin(this.postId, page)
     .subscribe(comments => {
-      if (comments.length === 0) this.router.navigateByUrl('/admin');
+      if (comments.count === 0) this.router.navigateByUrl('/admin');
 
       this.comments = comments.rows;
       this.paginationService.totalPages = Math.ceil(comments.count / this.paginationService.commentsByPage);

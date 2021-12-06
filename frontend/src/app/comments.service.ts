@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Post } from './post';
 import { Comment } from './comment';
+import { CountAndAll } from './count-and-all';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,15 @@ export class CommentsService {
     )
   }
 
-  getAllByPostId(postId: Post["id"], page: number): Observable<any> {
-    return this.http.get<any>(`api/comments/post/${postId}?page=${page}`).pipe(
-      catchError(this.handleError<any>('Comments'))
+  getAllByPostId(postId: Post["id"], page: number): Observable<CountAndAll<Comment>> {
+    return this.http.get<CountAndAll<Comment>>(`api/comments/post/${postId}?page=${page}`).pipe(
+      catchError(this.handleError<CountAndAll<Comment>>('Comments'))
     );
   }
 
-  getAllByPostForAdmin(postId: Post["id"], page: number): Observable<any> {
-    return this.http.get<any>(`api/comments/admin/${postId}?page=${page}`).pipe(
-      catchError(this.handleError<any>('Comments'))
+  getAllByPostForAdmin(postId: Post["id"], page: number): Observable<CountAndAll<Comment>> {
+    return this.http.get<CountAndAll<Comment>>(`api/comments/admin/${postId}?page=${page}`).pipe(
+      catchError(this.handleError<CountAndAll<Comment>>('Comments'))
     );
   }
 

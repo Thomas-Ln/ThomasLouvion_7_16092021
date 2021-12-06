@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Comment } from './comment';
+import { Post } from './post';
+import { Role } from './role';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +22,11 @@ export class AuthService {
     return this.auth ? JSON.parse(this.auth).userId : null;
   }
 
-  getUserRole() : Observable<any> {
-    return this.http.get<any>(`/api/auth/admin`).pipe(
-      catchError(this.handleError<any>(`getUserRole`))
-      );
-    }
+  getUserRole() : Observable<Role> {
+    return this.http.get<Role>(`/api/auth/admin`).pipe(
+      catchError(this.handleError<Role>(`getUserRole`))
+    );
+  }
 
   /**
    * @summary Handle the update of the 'moderated' field of posts/comments tables in database
@@ -31,9 +34,9 @@ export class AuthService {
    * @param type Tell which table must be updated
    * @param id Tell which line must be updated
   */
-  moderate(value: boolean, type: 'posts' | 'comments', id: number) : Observable<any> {
-    return this.http.put<any>(`/api/${type}/moderate/${id}`, {moderated: value}).pipe(
-      catchError(this.handleError<any>(`Moderate`))
+  moderate(value: boolean, type: 'posts' | 'comments', id: number) : Observable<Post | Comment> {
+    return this.http.put<Post | Comment>(`/api/${type}/moderate/${id}`, {moderated: value}).pipe(
+      catchError(this.handleError<Post | Comment>(`Moderate`))
     )
   }
 

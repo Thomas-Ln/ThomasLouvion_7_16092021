@@ -115,7 +115,7 @@
             </ng-template>
             <!-- If TEXT posts routelink to admin/text/:id -->
             <a
-              *ngIf="post.text != null && post.count_comments > 0"
+              *ngIf="post.text != null && post.count_comments! > 0"
               [routerLink]="['/admin/text/', post.id]"
               class="text-blue-600 font-bold overflow-hidden"
               title="Administrez les commentaires de ce post"
@@ -124,7 +124,7 @@
             </a>
             <!-- If IMAGE Posts routelink to admin/image/:id-->
             <a
-              *ngIf="post.image != null && post.count_comments > 0"
+              *ngIf="post.image != null && post.count_comments! > 0"
               [routerLink]="['/admin/image/', post.id]"
               class="text-blue-600 font-bold"
               title="Administrez les commentaires de ce post"
@@ -132,16 +132,16 @@
               <ng-container *ngTemplateOutlet="postTitle"></ng-container>
             </a>
             <!-- If post has NO COMMENTS no need to redirect to comments admin -->
-            <p *ngIf="post.count_comments === 0">
+            <p *ngIf="post.count_comments! === 0">
               <ng-container *ngTemplateOutlet="postTitle"></ng-container>
             </p>
           </td>
           <!-- AUTEUR -->
-          <td class="px-4 py-2">{{ post.user.name }}</td>
+          <td class="px-4 py-2">{{ post.user!.name }}</td>
           <!-- CRÉE LE -->
           <td class="px-4 py-2">{{ post.createdAt | date }}</td>
           <!-- NOMBRE DE COMMENTAIRES -->
-          <td class="px-4 py-2 text-center">{{ post.count_comments }}</td>
+          <td class="px-4 py-2 text-center">{{ post.count_comments! }}</td>
           <!-- MODÉRÉ -->
           <td class="px-4 py-2 text-center">
             <input

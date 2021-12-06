@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationType } from '../pagination-type';
+import { Post } from '../post';
 import { AuthService } from './../auth.service';
 import { PaginationService } from './../pagination.service';
 import { PostsService } from './../posts.service';
@@ -10,7 +11,7 @@ import { PostsService } from './../posts.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  posts: any[] = [];
+  posts: Post[] = [];
   paginationType: PaginationType = 'prevNext';
   contentHasLoaded: boolean = false;
 

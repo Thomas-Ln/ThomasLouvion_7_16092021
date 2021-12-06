@@ -23,19 +23,16 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile() {
-    if (this.userId)
-      this.usersService.getProfile(this.userId)
-      .subscribe(profile => {
-        this.profile = profile[0];
-      })
+    this.usersService.getProfile(this.userId)
+    .subscribe(profile => {
+      this.profile = profile;
+    })
   }
 
   deleteAccount(): void {
-    if (this.userId) {
-      this.usersService.deleteAccount(this.userId).subscribe();
-      this.usersService.logout();
-      this.router.navigateByUrl('/signup');
-    }
+    this.usersService.deleteAccount(this.userId).subscribe();
+    this.usersService.logout();
+    this.router.navigateByUrl('/signup');
   }
 
 }

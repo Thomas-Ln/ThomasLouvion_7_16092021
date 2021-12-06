@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { CountAndAll } from './count-and-all';
 import { Post } from './post';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class PostsService {
     )
   }
 
-  createOneWithImage(post: any, image: any): Observable<Post> {
+  createOneWithImage(post: {user_id: User['id'], title: string}, image: File): Observable<Post> {
     const postData = new FormData();
     postData.append('post', JSON.stringify(post));
     postData.append('image', image, post.title);
@@ -27,18 +29,18 @@ export class PostsService {
     )
   }
 
-  getAll(page: number): Observable<any> {
-    return this.http.get<any>(`/api/posts?page=${page}`).pipe(
-      catchError(this.handleError<any>('Posts'))
+  getAll(page: number): Observable<CountAndAll<Post>> {
+    return this.http.get<CountAndAll<Post>>(`/api/posts?page=${page}`).pipe(
+      catchError(this.handleError<CountAndAll<Post>>('Posts'))
     );
   }
 
   /**
    * Fetch only text OR image posts
    */
-  getAllByType(type: string, page: number): Observable<any> {
-    return this.http.get<any>(`/api/posts/type/${type}?page=${page}`).pipe(
-      catchError(this.handleError<any>('Posts'))
+  getAllByType(type: string, page: number): Observable<CountAndAll<Post>> {
+    return this.http.get<CountAndAll<Post>>(`/api/posts/type/${type}?page=${page}`).pipe(
+      catchError(this.handleError<CountAndAll<Post>>('Posts'))
     );
   }
 

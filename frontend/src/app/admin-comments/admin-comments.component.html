@@ -68,7 +68,7 @@
             {{ comment.content | slice: 0:60 }}
             <span *ngIf="comment.content.length > 60">...</span>
           </td>
-          <td class="px-4 py-2">{{ comment.user.name }}</td>
+          <td class="px-4 py-2">{{ comment.user!.name }}</td>
           <td class="px-4 py-2">{{ comment.createdAt | date }}</td>
           <td class="px-4 py-2 text-center">
             <input

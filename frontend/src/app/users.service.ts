@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from './user';
 import { Token } from './token';
+import { Profile } from './profile';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   /**GET: name & email of user */
-  getProfile(userId: User['id']): Observable<any> {
-    return this.http.get<any>(`/api/auth/profile/${userId}`).pipe(
-      catchError(this.handleError<any>('Profile'))
+  getProfile(userId: User['id']): Observable<Profile> {
+    return this.http.get<Profile>(`/api/auth/profile/${userId}`).pipe(
+      catchError(this.handleError<Profile>('Profile'))
     )
   }
 

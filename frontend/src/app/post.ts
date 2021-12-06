@@ -9,4 +9,7 @@ export interface Post {
   createdAt: Date;
   updatedAt: Date;
   moderated: true | false;
+  userId?: User["id"];
+  count_comments?: number;
+  user?: { name: User["name"] };
 }
