@@ -30,9 +30,11 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAccount(): void {
-    this.usersService.deleteAccount(this.userId).subscribe();
-    this.usersService.logout();
-    this.router.navigateByUrl('/signup');
+    if (window.confirm('Voulez vous vraiment supprimer votre compte ?')) {
+      this.usersService.deleteAccount(this.userId).subscribe();
+      this.usersService.logout();
+      window.location.assign('signup');
+    }
   }
 
 }
