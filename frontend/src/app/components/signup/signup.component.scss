@@ -1,0 +1,15 @@
+.btn-full {
+  @apply w-full
+  px-4 py-2
+  bg-gray-400
+  rounded-full
+  font-bold text-white
+  cursor-not-allowed;
+}
+
+.valid {
+  @apply bg-blue-500
+  hover:bg-blue-700
+  focus:bg-blue-700
+  cursor-pointer;
+}
