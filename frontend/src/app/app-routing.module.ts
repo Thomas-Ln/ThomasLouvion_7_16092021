@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminCommentsComponent } from './admin-comments/admin-comments.component';
-import { AdminGuard } from './admin.guard';
-import { AdminComponent } from './admin/admin.component';
-import { AuthService } from './auth.service';
-import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PostFormComponent } from './post-form/post-form.component';
-import { PostComponent } from './post/post.component';
-import { PostsListComponent } from './posts-list/posts-list.component';
-import { ProfileGuard } from './profile.guard';
-import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
+import { AdminCommentsComponent } from './components/admin-comments/admin-comments.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
+import { PostComponent } from './components/post/post.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { AdminGuard } from './guards/admin.guard';
+import { ProfileGuard } from './guards/profile.guard';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signup', pathMatch: 'full' },
