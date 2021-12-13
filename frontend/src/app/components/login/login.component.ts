@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       this.usersService.login(this.loginForm.value).pipe(
         finalize(() => {
           window.location.assign('posts/text');
-          // this.router.navigateByUrl('posts/text');
         })
       ).subscribe((data) =>  {
         localStorage.setItem('token', JSON.stringify(data));

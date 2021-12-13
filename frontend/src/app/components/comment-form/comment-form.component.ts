@@ -41,10 +41,7 @@ export class CommentFormComponent implements OnInit {
 
     if (this.commentForm.valid) {
       this.commentsService.createOne(this.commentForm.value).subscribe();
-      // reload url, because the comment-form-component is used in the post-component
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigateByUrl(`posts/${postsType}/${this.postId}`)
-      });
+      window.location.reload();
     }
 
   }
