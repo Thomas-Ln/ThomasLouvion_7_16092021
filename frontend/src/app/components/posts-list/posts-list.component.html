@@ -27,11 +27,11 @@
           *ngIf="post.image"
           class="flex-grow object-cover mb-4 p-4 border rounded-xl shadow"
           src="{{ post.image }}"
-          alt="image du post"
+          alt="image du post : {{ post.title }}"
         />
         <div class="flex justify-between items-center flex-wrap sm:flex-nowrap">
           <button class="btn-info text-sm font-medium">Lire la suite</button>
-          <time class="text-sm text-gray-400">
+          <time class="text-sm text-gray-500">
             {{ post.createdAt | date: "d MMMM y - HH'h'mm" }}
           </time>
         </div>

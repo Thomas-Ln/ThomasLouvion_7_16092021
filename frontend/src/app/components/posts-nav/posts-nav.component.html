@@ -1,19 +1,24 @@
 <nav class="w-full flex flex-col items-center mb-12 p-4">
+  <h1 class="hidden">Liste des Posts</h1>
   <div class="w-full flex justify-center mb-4 p-4">
-    <a
-      routerLink="/posts/text"
-      routerLinkActive="isTabActive"
-      class="px-6 text-2xl"
-      (click)="goToFirstPage()"
-      >Textes</a
-    >
-    <a
-      routerLink="/posts/image"
-      routerLinkActive="isTabActive"
-      class="px-6 text-2xl"
-      (click)="goToFirstPage()"
-      >Images</a
-    >
+    <h2>
+      <a
+        routerLink="/posts/text"
+        routerLinkActive="isTabActive"
+        class="px-6 text-2xl"
+        (click)="goToFirstPage()"
+        >Textes</a
+      >
+    </h2>
+    <h2>
+      <a
+        routerLink="/posts/image"
+        routerLinkActive="isTabActive"
+        class="px-6 text-2xl"
+        (click)="goToFirstPage()"
+        >Images</a
+      >
+    </h2>
   </div>
   <a routerLink="create" class="btn-info font-bold"> + Ajouter un post </a>
 </nav>

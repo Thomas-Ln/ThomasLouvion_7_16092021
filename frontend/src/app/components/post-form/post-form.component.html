@@ -13,7 +13,7 @@
         lg:rounded-l-none
       "
     >
-      <h3 class="pt-4 text-2xl text-center">Créez un nouveau Post!</h3>
+      <h1 class="pt-4 text-2xl text-center">Créez un nouveau Post!</h1>
       <form
         [formGroup]="postForm"
         (ngSubmit)="onSubmit()"
@@ -21,7 +21,7 @@
         class="px-8 pt-6 pb-8 mb-4 bg-white rounded"
       >
         <div class="mb-4">
-          <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="title">
             Titre
           </label>
           <input
@@ -46,7 +46,7 @@
         </div>
         <!-- postType Text -->
         <div *ngIf="postType === 'text'" class="mb-4">
-          <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="text">
             Contenu
           </label>
           <textarea
@@ -71,7 +71,7 @@
         </div>
         <!-- postType Image -->
         <div *ngIf="postType === 'image'" class="mb-4">
-          <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="image">
             Image
           </label>
           <input

@@ -2,7 +2,7 @@
   <section class="md:w-2/3 lg:w-6/12 p-6 mb-6">
     <h1 class="text-3xl">{{ post.title }}</h1>
     <article>
-      <time class="text-gray-400">{{ post.createdAt | date }}</time>
+      <time class="text-gray-500">{{ post.createdAt | date }}</time>
       <p *ngIf="post.text" class="mt-4">{{ post.text }}</p>
       <img
         *ngIf="post.image"
