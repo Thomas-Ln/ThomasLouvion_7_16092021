@@ -1,6 +1,6 @@
 <main class="flex flex-col items-center">
   <app-posts-nav></app-posts-nav>
-  <section class="w-2/3 flex flex-wrap justify-evenly mx-auto">
+  <section class="sm:w-2/3 px-2 flex flex-wrap justify-evenly mx-auto">
     <article
       *ngFor="let post of posts"
       class="
@@ -29,7 +29,7 @@
           src="{{ post.image }}"
           alt="image du post"
         />
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center flex-wrap sm:flex-nowrap">
           <button class="btn-info text-sm font-medium">Lire la suite</button>
           <time class="text-sm text-gray-400">
             {{ post.createdAt | date: "d MMMM y - HH'h'mm" }}

@@ -1,9 +1,18 @@
 <!-- IMPORTANT -->
 <!-- input image name must be "uploaded-image" -->
-<!-- <div *ngIf="">IMAGE</div> -->
 <main class="container mx-auto">
-  <div class="flex justify-center px-6">
-    <div class="w-full lg:w-1/3 bg-white p-5 rounded-lg lg:rounded-l-none">
+  <div class="flex justify-center sm:px-6">
+    <div
+      class="
+        w-full
+        md:w-2/3
+        xl:w-1/3
+        bg-white
+        md:p-5
+        rounded-lg
+        lg:rounded-l-none
+      "
+    >
       <h3 class="pt-4 text-2xl text-center">Créez un nouveau Post!</h3>
       <form
         [formGroup]="postForm"
